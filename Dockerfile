@@ -10,7 +10,7 @@ ENV GETDNS_TAG_HASH ffe471543bd947d6d96ddd212ee987ba3787fb36
 RUN apk add --no-cache git autoconf automake build-base libtool openssl-dev unbound-dev libidn-dev yaml-dev
 WORKDIR /build
 
-RUN git clone --depth=1 --recurse-submodules https://github.com/getdnsapi/getdns.git -b ${GETDNS_VERSION} && \
+RUN git clone --depth=1 --recurse-submodules https://github.com/getdnsapi/getdns.git -b ${GETDNS_VERSION}
 WORKDIR /build/getdns
 RUN git rev-parse HEAD --verify | grep ${GETDNS_TAG_HASH} && \
     libtoolize -ci && \
