@@ -39,4 +39,5 @@ COPY stubby.yml /etc/stubby/stubby.yml
 USER stubby
 
 EXPOSE 10053
-CMD ["tini", "--", "stubby"]
+ENTRYPOINT ["tini", "--", "stubby"]
+CMD ["-C", "/etc/stubby/stubby.yml"]
