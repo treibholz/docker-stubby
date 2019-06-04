@@ -33,11 +33,14 @@ RUN git rev-parse HEAD --verify | grep ${STUBBY_TAG_HASH} && \
 FROM alpine:3.9
 
 RUN apk add --no-cache unbound-libs libidn yaml tini && \
-    adduser -S stubby -u 100
+    adduser -S stubby -u 100 && \
+    mkdir -p /var/cache/stubby && \
+    chown stubby: /var/cache/stubby
+
 COPY --from=0 /usr/local/ /usr/local/
 COPY stubby.yml /etc/stubby/stubby.yml
-USER stubby
 
+USER stubby
 EXPOSE 10053
 ENTRYPOINT ["tini", "--", "stubby"]
 CMD ["-C", "/etc/stubby/stubby.yml"]
