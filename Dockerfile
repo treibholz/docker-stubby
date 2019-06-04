@@ -35,7 +35,8 @@ FROM alpine:3.9
 RUN apk add --no-cache unbound-libs libidn yaml tini && \
     adduser -S stubby -u 100
 COPY --from=0 /usr/local/ /usr/local/
-
+COPY stubby.yml /etc/stubby/stubby.yml
 USER stubby
 
-#CMD ["tini", "--", "stubby"]
+EXPOSE 10053
+CMD ["tini", "--", "stubby"]
